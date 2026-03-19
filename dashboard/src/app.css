@@ -1,0 +1,292 @@
+/* ==========================================================================
+   Réunion Road Safety Dashboard — Global Styles
+   Design direction: Editorial / magazine — light, airy, confident typography
+   ========================================================================== */
+
+/* --- Fonts (loaded from Google Fonts CDN) --- */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,700;9..144,800&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* --- Design tokens --- */
+:root {
+	/* Typography */
+	--font-display: 'Fraunces', Georgia, serif;
+	--font-body: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+	/* Palette — warm editorial with a bold amber accent */
+	--bg: #FAFAF7;
+	--bg-warm: #F5F3EE;
+	--surface: #FFFFFF;
+	--surface-alt: #F0EDE6;
+	--border: #E2DDD4;
+	--border-light: #EDE9E1;
+
+	--text: #1A1A1A;
+	--text-secondary: #5C5650;
+	--text-tertiary: #8A8279;
+	--text-inverse: #FAFAF7;
+
+	--accent: #D4760A;
+	--accent-light: #F5DFC0;
+	--accent-bg: rgba(212, 118, 10, 0.06);
+
+	--danger: #C73E1D;
+	--danger-light: #FADBD3;
+	--danger-bg: rgba(199, 62, 29, 0.06);
+
+	--warn: #D4960A;
+	--warn-light: #F5EBC0;
+
+	--safe: #2D8A56;
+	--safe-light: #D0F0DC;
+	--safe-bg: rgba(45, 138, 86, 0.06);
+
+	--blue: #2563A8;
+	--blue-light: #D0E2F5;
+	--blue-bg: rgba(37, 99, 168, 0.06);
+
+	--purple: #7C4DBA;
+	--purple-light: #E4D6F5;
+
+	/* Spacing scale */
+	--space-xs: 4px;
+	--space-sm: 8px;
+	--space-md: 16px;
+	--space-lg: 24px;
+	--space-xl: 40px;
+	--space-2xl: 64px;
+	--space-3xl: 96px;
+
+	/* Layout */
+	--max-width: 1120px;
+	--section-gap: 120px;
+
+	/* Shadows */
+	--shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+	--shadow-md: 0 4px 12px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+	--shadow-lg: 0 12px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+
+	/* Borders */
+	--radius-sm: 6px;
+	--radius-md: 10px;
+	--radius-lg: 16px;
+
+	/* Transitions */
+	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Reset & base --- */
+*, *::before, *::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	font-family: var(--font-body);
+	background: var(--bg);
+	color: var(--text);
+	font-size: 17px;
+	line-height: 1.7;
+	overflow-x: hidden;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4 {
+	font-family: var(--font-display);
+	line-height: 1.2;
+	color: var(--text);
+}
+
+h1 {
+	font-size: clamp(2.2rem, 5vw, 3.4rem);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+}
+
+h2 {
+	font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+	font-weight: 600;
+	letter-spacing: -0.01em;
+}
+
+h3 {
+	font-size: 1.25rem;
+	font-weight: 600;
+}
+
+p {
+	max-width: 65ch;
+}
+
+a {
+	color: var(--accent);
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+/* Monospace numbers for stats */
+.mono {
+	font-family: var(--font-mono);
+	font-variant-numeric: tabular-nums;
+}
+
+/* --- Utility classes --- */
+.container {
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: 0 var(--space-lg);
+}
+
+.section {
+	padding: var(--section-gap) 0;
+}
+
+.section + .section {
+	border-top: 1px solid var(--border-light);
+}
+
+.section-label {
+	font-family: var(--font-mono);
+	font-size: 0.72rem;
+	font-weight: 600;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--accent);
+	margin-bottom: var(--space-sm);
+}
+
+.section-title {
+	margin-bottom: var(--space-md);
+}
+
+.section-intro {
+	color: var(--text-secondary);
+	font-size: 1.05rem;
+	max-width: 60ch;
+	margin-bottom: var(--space-xl);
+}
+
+/* --- Cards --- */
+.card {
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+	padding: var(--space-lg);
+	box-shadow: var(--shadow-sm);
+	transition: box-shadow 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+}
+
+.card:hover {
+	box-shadow: var(--shadow-md);
+	transform: translateY(-1px);
+}
+
+/* --- Stat blocks --- */
+.stat-value {
+	font-family: var(--font-mono);
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.stat-label {
+	font-size: 0.78rem;
+	font-weight: 500;
+	color: var(--text-tertiary);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	margin-top: 4px;
+}
+
+/* --- Method/info notes --- */
+.info-box {
+	background: var(--accent-bg);
+	border-left: 3px solid var(--accent);
+	border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+	padding: var(--space-md) var(--space-lg);
+	font-size: 0.92rem;
+	color: var(--text-secondary);
+	line-height: 1.6;
+}
+
+.info-box strong {
+	color: var(--accent);
+}
+
+.method-box {
+	background: rgba(124, 77, 186, 0.04);
+	border-left: 3px solid var(--purple);
+	border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+	padding: var(--space-md) var(--space-lg);
+	font-size: 0.85rem;
+	color: var(--text-secondary);
+}
+
+/* --- Tooltip --- */
+.tooltip {
+	position: absolute;
+	z-index: 1000;
+	background: var(--text);
+	color: var(--text-inverse);
+	font-size: 0.82rem;
+	padding: 8px 14px;
+	border-radius: var(--radius-sm);
+	pointer-events: none;
+	box-shadow: var(--shadow-lg);
+	max-width: 280px;
+	line-height: 1.5;
+	opacity: 0;
+	transition: opacity 0.15s;
+}
+
+.tooltip.visible {
+	opacity: 1;
+}
+
+/* --- Badge / tag --- */
+.badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	font-family: var(--font-mono);
+	font-size: 0.72rem;
+	font-weight: 600;
+	padding: 3px 10px;
+	border-radius: 20px;
+	line-height: 1;
+}
+
+.badge-danger { background: var(--danger-light); color: var(--danger); }
+.badge-warn   { background: var(--warn-light); color: var(--warn); }
+.badge-safe   { background: var(--safe-light); color: var(--safe); }
+.badge-blue   { background: var(--blue-light); color: var(--blue); }
+.badge-purple { background: var(--purple-light); color: var(--purple); }
+
+/* --- Scroll-triggered fade-in animation --- */
+.reveal {
+	opacity: 0;
+	transform: translateY(20px);
+	transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+.reveal.visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+	body { font-size: 15px; }
+	.container { padding: 0 var(--space-md); }
+	.section { padding: var(--space-2xl) 0; }
+	:root { --section-gap: 64px; }
+}

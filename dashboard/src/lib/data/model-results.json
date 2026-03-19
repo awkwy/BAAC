@@ -1,0 +1,221 @@
+{
+  "description":"Double Hurdle model — La Réunion 2024",
+  "population":{
+    "total_usagers":2493,
+    "graves_h1":425,
+    "pct_graves":17.0,
+    "tues_h2":43,
+    "pct_tues_parmi_graves":10.1
+  },
+  "hurdle1":{
+    "name":"P(grave | accident)",
+    "method":"GLM Logistique Ridge (L2), balanced class weights",
+    "n_features":43,
+    "auc_roc_cv":{
+      "mean":0.825,
+      "std":0.0219
+    },
+    "auc_roc_test":0.7984,
+    "gini":0.5968,
+    "brier":0.1831,
+    "top_aggravating":[
+      {
+        "feature":"2RM >125cm³",
+        "OR":3.12,
+        "label":"Moto > 125cm³"
+      },
+      {
+        "feature":"piéton",
+        "OR":2.85,
+        "label":"Piéton"
+      },
+      {
+        "feature":"vélo/VAE",
+        "OR":2.64,
+        "label":"Vélo / VAE"
+      },
+      {
+        "feature":"nuit sans éclairage",
+        "OR":2.31,
+        "label":"Nuit sans éclairage"
+      },
+      {
+        "feature":"sans collision",
+        "OR":2.18,
+        "label":"Sans collision (seul)"
+      },
+      {
+        "feature":"2RM 50-125cm³",
+        "OR":1.95,
+        "label":"Moto 50-125cm³"
+      },
+      {
+        "feature":"frontale",
+        "OR":1.82,
+        "label":"Collision frontale"
+      },
+      {
+        "feature":"nuit éclairage allumé",
+        "OR":1.74,
+        "label":"Nuit éclairée"
+      },
+      {
+        "feature":"hors agglomération",
+        "OR":1.55,
+        "label":"Hors agglomération"
+      },
+      {
+        "feature":"pluie",
+        "OR":1.38,
+        "label":"Temps pluvieux"
+      }
+    ],
+    "top_protective":[
+      {
+        "feature":"voiture",
+        "OR":0.42,
+        "label":"Voiture"
+      },
+      {
+        "feature":"passager",
+        "OR":0.58,
+        "label":"Passager"
+      },
+      {
+        "feature":"ceinture",
+        "OR":0.62,
+        "label":"Ceinture attachée"
+      },
+      {
+        "feature":"en agglomération",
+        "OR":0.65,
+        "label":"En agglomération"
+      },
+      {
+        "feature":"collision arrière",
+        "OR":0.71,
+        "label":"Collision arrière"
+      }
+    ]
+  },
+  "hurdle2":{
+    "name":"P(tué | grave)",
+    "method":"GLM Logistique Ridge, stepwise BIC selection",
+    "n_features":4,
+    "variables":[
+      "equip_bin_protégé",
+      "age",
+      "nuit",
+      "en_agglomeration"
+    ],
+    "epv":10.8,
+    "auc_roc_cv":{
+      "mean":0.8087,
+      "std":0.1248
+    },
+    "aic":233.8,
+    "bic":254.0,
+    "odds_ratios":[
+      {
+        "variable":"equip_bin_protégé",
+        "label":"Équipement de protection",
+        "beta":-1.355,
+        "OR":0.26,
+        "CI_lo":0.12,
+        "CI_hi":0.54,
+        "p":0.0003,
+        "interpretation":"Porter un casque ou une ceinture divise le risque de décès par 4"
+      },
+      {
+        "variable":"age",
+        "label":"Âge (+1 an)",
+        "beta":0.048,
+        "OR":1.05,
+        "CI_lo":1.03,
+        "CI_hi":1.07,
+        "p":0.0,
+        "interpretation":"Chaque année supplémentaire augmente le risque de décès de 5%"
+      },
+      {
+        "variable":"nuit",
+        "label":"Accident de nuit",
+        "beta":1.321,
+        "OR":3.75,
+        "CI_lo":1.69,
+        "CI_hi":8.29,
+        "p":0.0011,
+        "interpretation":"La nuit quadruple le risque de décès"
+      },
+      {
+        "variable":"en_agglomeration",
+        "label":"En agglomération",
+        "beta":-1.394,
+        "OR":0.25,
+        "CI_lo":0.12,
+        "CI_hi":0.53,
+        "p":0.0003,
+        "interpretation":"Être en ville divise le risque de décès par 4"
+      }
+    ],
+    "expert_model":{
+      "variables":[
+        "role",
+        "age",
+        "nuit",
+        "en_agglomeration"
+      ],
+      "odds_ratios":[
+        {
+          "variable":"role_piéton",
+          "label":"Piéton",
+          "OR":3.41,
+          "CI_lo":1.35,
+          "CI_hi":8.6,
+          "p":0.0093
+        },
+        {
+          "variable":"role_passager",
+          "label":"Passager",
+          "OR":1.07,
+          "CI_lo":0.37,
+          "CI_hi":3.11,
+          "p":0.9058
+        },
+        {
+          "variable":"age",
+          "label":"Âge (+1 an)",
+          "OR":1.04,
+          "CI_lo":1.02,
+          "CI_hi":1.06,
+          "p":0.0002
+        },
+        {
+          "variable":"nuit",
+          "label":"Nuit",
+          "OR":4.51,
+          "CI_lo":2.07,
+          "CI_hi":9.85,
+          "p":0.0002
+        },
+        {
+          "variable":"en_agglomeration",
+          "label":"En agglo.",
+          "OR":0.27,
+          "CI_lo":0.13,
+          "CI_hi":0.58,
+          "p":0.0007
+        }
+      ]
+    }
+  },
+  "composite_score":{
+    "alpha":4.0,
+    "ratio_max_min":16.0,
+    "description":"Score = P(grave) × [α × P(tué|grave) + (1-α)×P(hosp|grave)]"
+  },
+  "validation":{
+    "brant_test":"49% des variables violent l'hypothèse PO → modèle ordinal unique rejeté",
+    "spearman":"Rankings H1 vs H2 divergents (p > 0.05) → les deux hurdles captent des mécanismes différents",
+    "gam_check":"EDF ≈ 0.6 → relation quasi-linéaire, GLM suffisant"
+  }
+}
