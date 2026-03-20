@@ -84,8 +84,8 @@ Etude gravité des accidents 974/
 │   │   ├── lieux-2024.csv
 │   │   ├── usagers-2024.csv
 │   │   ├── vehicules-2024.csv
-│   │   ├── meteo_2024.csv
-│   │   ├── H_974_previous-2020-2024.csv
+│   │   ├── meteo_2024.csv                ← supprimé car trop volumineux
+│   │   ├── H_974_previous-2020-2024.csv  ← Supprimé car trop volumineux
 │   │   └── 2024.csv
 │   ├── data_processed/                 ← Données nettoyées et enrichies
 │   │   ├── accidents_final.parquet
