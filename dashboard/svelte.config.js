@@ -6,12 +6,8 @@ const config = {
 	preprocess: vitePreprocess(),
 	kit: {
 		paths: {
-			base: '/BAAC',
-			assets: '/BAAC'
+			base: '/BAAC'
 		},
-	prerender: {
-		default: true,
-	},
 		adapter: adapter({
 			pages: 'build',
 			assets: 'build',
