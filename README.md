@@ -4,7 +4,7 @@
 
 Dashboard SvelteKit interactif pour explorer les accidents de la route à La Réunion (département 974), basé sur les données BAAC 2024.
 
-> 🔗 **[Voir le dashboard en ligne](https://votre-user.github.io/securite-routiere-974/)**
+> 🔗 **[Voir le dashboard en ligne](https://awkwy.github.io/BAAC/)**
 
 ---
 
