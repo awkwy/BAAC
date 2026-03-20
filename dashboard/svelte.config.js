@@ -8,6 +8,9 @@ const config = {
 		paths: {
 			base: '/BAAC'
 		},
+	prerender: {
+		default: true,
+	},
 		adapter: adapter({
 			pages: 'build',
 			assets: 'build',
