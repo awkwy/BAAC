@@ -1,4 +1,4 @@
-# Accidentologie à La Réunion — 2024
+# Accident de la route à La Réunion — 2024
 
 **934 accidents corporels. 2 565 usagers impliqués. Quels facteurs déterminent la gravité ?**
 
